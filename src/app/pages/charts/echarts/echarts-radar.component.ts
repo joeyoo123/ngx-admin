@@ -1,22 +1,26 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-radar',
+  standalone: true,
+  imports: [NgxEchartsDirective],
+  providers: [provideEcharts()],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class EchartsRadarComponent implements AfterViewInit, OnDestroy {
   options: any = {};
-  themeSubscription: any;
+  themeSubscription!: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
 
@@ -31,15 +35,10 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy {
           },
         },
         radar: {
-          name: {
-            textStyle: {
-              color: echarts.textColor,
-            },
-          },
           indicator: [
             { name: 'Sales', max: 6500 },
             { name: 'Administration', max: 16000 },
-            { name: 'Information Techology', max: 30000 },
+            { name: 'Information Technology', max: 30000 },
             { name: 'Customer Support', max: 38000 },
             { name: 'Development', max: 52000 },
             { name: 'Marketing', max: 25000 },
@@ -48,6 +47,9 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy {
             areaStyle: {
               color: 'transparent',
             },
+          },
+          axisName: {
+            color: echarts.textColor,
           },
         },
         series: [

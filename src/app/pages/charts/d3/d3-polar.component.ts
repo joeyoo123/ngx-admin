@@ -1,8 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-d3-polar',
+  standalone: true,
+  imports: [NgxChartsModule],
   template: `
     <ngx-charts-polar-chart
       [scheme]="colorScheme"
@@ -23,52 +27,25 @@ export class D3PolarComponent implements OnDestroy {
     {
       name: 'Germany',
       series: [
-        {
-          name: '1990',
-          value: 31476,
-        },
-        {
-          name: '2000',
-          value: 36953,
-        },
-        {
-          name: '2010',
-          value: 40632,
-        },
+        { name: '1990', value: 31476 },
+        { name: '2000', value: 36953 },
+        { name: '2010', value: 40632 },
       ],
     },
     {
       name: 'USA',
       series: [
-        {
-          name: '1990',
-          value: 37060,
-        },
-        {
-          name: '2000',
-          value: 45986,
-        },
-        {
-          name: '2010',
-          value: 49737,
-        },
+        { name: '1990', value: 37060 },
+        { name: '2000', value: 45986 },
+        { name: '2010', value: 49737 },
       ],
     },
     {
       name: 'France',
       series: [
-        {
-          name: '1990',
-          value: 29476,
-        },
-        {
-          name: '2000',
-          value: 34774,
-        },
-        {
-          name: '2010',
-          value: 36240,
-        },
+        { name: '1990', value: 29476 },
+        { name: '2000', value: 34774 },
+        { name: '2010', value: 36240 },
       ],
     },
   ];
@@ -81,9 +58,9 @@ export class D3PolarComponent implements OnDestroy {
   xAxisLabel = 'Country';
   yAxisLabel = 'Population';
   colorScheme: any;
-  themeSubscription: any;
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {

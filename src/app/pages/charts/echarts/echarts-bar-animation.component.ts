@@ -1,24 +1,29 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-bar-animation',
+  standalone: true,
+  imports: [NgxEchartsDirective],
+  providers: [provideEcharts()],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy {
   options: any = {};
-  themeSubscription: any;
+  themeSubscription!: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-      const xAxisData = [];
-      const data1 = [];
-      const data2 = [];
+      const xAxisData: string[] = [];
+      const data1: number[] = [];
+      const data2: number[] = [];
 
       const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
@@ -46,9 +51,7 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
           },
         ],
@@ -65,9 +68,7 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
           },
         ],
@@ -76,17 +77,17 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy {
             name: 'bar',
             type: 'bar',
             data: data1,
-            animationDelay: idx => idx * 10,
+            animationDelay: (idx: number) => idx * 10,
           },
           {
             name: 'bar2',
             type: 'bar',
             data: data2,
-            animationDelay: idx => idx * 10 + 100,
+            animationDelay: (idx: number) => idx * 10 + 100,
           },
         ],
         animationEasing: 'elasticOut',
-        animationDelayUpdate: idx => idx * 5,
+        animationDelayUpdate: (idx: number) => idx * 5,
       };
 
       for (let i = 0; i < 100; i++) {

@@ -1,8 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-d3-line',
+  standalone: true,
+  imports: [NgxChartsModule],
   template: `
     <ngx-charts-line-chart
       [scheme]="colorScheme"
@@ -22,40 +26,22 @@ export class D3LineComponent implements OnDestroy {
     {
       name: 'Germany',
       series: [
-        {
-          name: '2010',
-          value: 7300,
-        },
-        {
-          name: '2011',
-          value: 8940,
-        },
+        { name: '2010', value: 7300 },
+        { name: '2011', value: 8940 },
       ],
     },
     {
       name: 'USA',
       series: [
-        {
-          name: '2010',
-          value: 7870,
-        },
-        {
-          name: '2011',
-          value: 8270,
-        },
+        { name: '2010', value: 7870 },
+        { name: '2011', value: 8270 },
       ],
     },
     {
       name: 'France',
       series: [
-        {
-          name: '2010',
-          value: 5002,
-        },
-        {
-          name: '2011',
-          value: 5800,
-        },
+        { name: '2010', value: 5002 },
+        { name: '2011', value: 5800 },
       ],
     },
   ];
@@ -67,9 +53,9 @@ export class D3LineComponent implements OnDestroy {
   showYAxisLabel = true;
   yAxisLabel = 'Population';
   colorScheme: any;
-  themeSubscription: any;
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {

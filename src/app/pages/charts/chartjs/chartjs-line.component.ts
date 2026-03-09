@@ -1,20 +1,28 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService, NbColorHelper } from '@nebular/theme';
+import { BaseChartDirective } from 'ng2-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { ColorHelper } from '../../../core/color-helper';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-chartjs-line',
+  standalone: true,
+  imports: [BaseChartDirective],
   template: `
-    <chart type="line" [data]="data" [options]="options"></chart>
+    <canvas baseChart
+      [type]="'line'"
+      [data]="data"
+      [options]="options">
+    </canvas>
   `,
 })
 export class ChartjsLineComponent implements OnDestroy {
-  data: any;
-  options: any;
-  themeSubscription: any;
+  data: any = {};
+  options: any = {};
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
 
@@ -23,52 +31,49 @@ export class ChartjsLineComponent implements OnDestroy {
         datasets: [{
           data: [65, 59, 80, 81, 56, 55, 40],
           label: 'Series A',
-          backgroundColor: NbColorHelper.hexToRgbA(colors.primary, 0.3),
+          backgroundColor: ColorHelper.hexToRgbA(colors.primary, 0.3),
           borderColor: colors.primary,
         }, {
           data: [28, 48, 40, 19, 86, 27, 90],
           label: 'Series B',
-          backgroundColor: NbColorHelper.hexToRgbA(colors.danger, 0.3),
+          backgroundColor: ColorHelper.hexToRgbA(colors.danger, 0.3),
           borderColor: colors.danger,
         }, {
           data: [18, 48, 77, 9, 100, 27, 40],
           label: 'Series C',
-          backgroundColor: NbColorHelper.hexToRgbA(colors.info, 0.3),
+          backgroundColor: ColorHelper.hexToRgbA(colors.info, 0.3),
           borderColor: colors.info,
-        },
-        ],
+        }],
       };
 
       this.options = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+          x: {
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
             },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+            ticks: {
+              color: chartjs.textColor,
             },
-          ],
+          },
+          y: {
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
+            },
+            ticks: {
+              color: chartjs.textColor,
+            },
+          },
         },
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
       };

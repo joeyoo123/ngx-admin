@@ -1,23 +1,27 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-pie',
+  standalone: true,
+  imports: [NgxEchartsDirective],
+  providers: [provideEcharts()],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class EchartsPieComponent implements AfterViewInit, OnDestroy {
   options: any = {};
-  themeSubscription: any;
+  themeSubscription!: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
-      const colors = config.variables;
+      const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
 
       this.options = {
@@ -48,25 +52,19 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
               { value: 135, name: 'Russia' },
               { value: 1548, name: 'USA' },
             ],
-            itemStyle: {
-              emphasis: {
+            emphasis: {
+              itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
                 shadowColor: echarts.itemHoverShadowColor,
               },
             },
             label: {
-              normal: {
-                textStyle: {
-                  color: echarts.textColor,
-                },
-              },
+              color: echarts.textColor,
             },
             labelLine: {
-              normal: {
-                lineStyle: {
-                  color: echarts.axisLineColor,
-                },
+              lineStyle: {
+                color: echarts.axisLineColor,
               },
             },
           },

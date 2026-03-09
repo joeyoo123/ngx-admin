@@ -1,22 +1,26 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-bar',
+  standalone: true,
+  imports: [NgxEchartsDirective],
+  providers: [provideEcharts()],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class EchartsBarComponent implements AfterViewInit, OnDestroy {
   options: any = {};
-  themeSubscription: any;
+  themeSubscription!: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
 
@@ -48,9 +52,7 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
           },
         ],
@@ -68,9 +70,7 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
           },
         ],

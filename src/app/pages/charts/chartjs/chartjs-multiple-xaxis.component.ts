@@ -1,20 +1,27 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { BaseChartDirective } from 'ng2-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-chartjs-multiple-xaxis',
+  standalone: true,
+  imports: [BaseChartDirective],
   template: `
-    <chart type="line" [data]="data" [options]="options"></chart>
+    <canvas baseChart
+      [type]="'line'"
+      [data]="data"
+      [options]="options">
+    </canvas>
   `,
 })
 export class ChartjsMultipleXaxisComponent implements OnDestroy {
-  data: {};
-  options: any;
-  themeSubscription: any;
+  data: any = {};
+  options: any = {};
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
 
@@ -60,48 +67,46 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
       this.options = {
         responsive: true,
         maintainAspectRatio: false,
-        legend: {
-          position: 'bottom',
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
         hover: {
           mode: 'index',
         },
         scales: {
-          xAxes: [
-            {
+          x: {
+            display: true,
+            title: {
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Month',
-              },
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+              text: 'Month',
             },
-          ],
-          yAxes: [
-            {
+            grid: {
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Value',
-              },
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+              color: chartjs.axisLineColor,
             },
-          ],
+            ticks: {
+              color: chartjs.textColor,
+            },
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Value',
+            },
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
+            },
+            ticks: {
+              color: chartjs.textColor,
+            },
+          },
         },
       };
     });

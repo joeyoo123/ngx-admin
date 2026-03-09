@@ -1,22 +1,26 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-multiple-xaxis',
+  standalone: true,
+  imports: [NgxEchartsDirective],
+  providers: [provideEcharts()],
   template: `
     <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
   options: any = {};
-  themeSubscription: any;
+  themeSubscription!: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
 
@@ -52,32 +56,20 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
             axisPointer: {
               label: {
-                formatter: params => {
+                formatter: (params: any) => {
                   return (
-                    'Precipitation  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                    'Precipitation  ' + params.value + (params.seriesData.length ? ': ' + params.seriesData[0].data : '')
                   );
                 },
               },
             },
             data: [
-              '2016-1',
-              '2016-2',
-              '2016-3',
-              '2016-4',
-              '2016-5',
-              '2016-6',
-              '2016-7',
-              '2016-8',
-              '2016-9',
-              '2016-10',
-              '2016-11',
-              '2016-12',
+              '2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6',
+              '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12',
             ],
           },
           {
@@ -92,32 +84,20 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
             axisPointer: {
               label: {
-                formatter: params => {
+                formatter: (params: any) => {
                   return (
-                    'Precipitation  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                    'Precipitation  ' + params.value + (params.seriesData.length ? ': ' + params.seriesData[0].data : '')
                   );
                 },
               },
             },
             data: [
-              '2015-1',
-              '2015-2',
-              '2015-3',
-              '2015-4',
-              '2015-5',
-              '2015-6',
-              '2015-7',
-              '2015-8',
-              '2015-9',
-              '2015-10',
-              '2015-11',
-              '2015-12',
+              '2015-1', '2015-2', '2015-3', '2015-4', '2015-5', '2015-6',
+              '2015-7', '2015-8', '2015-9', '2015-10', '2015-11', '2015-12',
             ],
           },
         ],
@@ -135,9 +115,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
+              color: echarts.textColor,
             },
           },
         ],
