@@ -21,6 +21,7 @@ export class CKEditorComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (typeof CKEDITOR !== 'undefined') {
+      CKEDITOR.basePath = '/assets/ckeditor/';
       this.editorInstance = CKEDITOR.replace(this.editorContainer.nativeElement, {
         extraPlugins: 'divarea',
         height: '320',
