@@ -1,53 +1,27 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbIconLibraries } from '@nebular/theme';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'ngx-icons',
-  styleUrls: ['./icons.component.scss'],
-  templateUrl: './icons.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatIconModule],
+  template: `
+    <mat-card>
+      <mat-card-header><mat-card-title>Material Icons</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <div class="icons-grid">
+          <div *ngFor="let icon of icons" class="icon-item">
+            <mat-icon>{{ icon }}</mat-icon>
+            <span>{{ icon }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styles: [`.icons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:16px}.icon-item{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border-radius:4px;cursor:pointer}.icon-item:hover{background:#f0f0f0}.icon-item span{font-size:0.75rem;color:#8f9bb3;text-align:center}`],
 })
 export class IconsComponent {
-
-  evaIcons = [];
-
-  constructor(iconsLibrary: NbIconLibraries) {
-    this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
-      .filter(icon => icon.indexOf('outline') === -1);
-
-    iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
-    iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
-    iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
-  }
-
-  icons = {
-
-    ionicons: [
-      'ionic', 'arrow-right-b', 'arrow-down-b', 'arrow-left-b', 'arrow-up-c', 'arrow-right-c',
-      'arrow-down-c', 'arrow-left-c', 'arrow-return-right', 'arrow-return-left', 'arrow-swap',
-      'arrow-shrink', 'arrow-expand', 'arrow-move', 'arrow-resize', 'chevron-up',
-      'chevron-right', 'chevron-down', 'chevron-left', 'navicon-round', 'navicon',
-      'drag', 'log-in', 'log-out', 'checkmark-round', 'checkmark', 'checkmark-circled',
-      'close-round', 'plus-round', 'minus-round', 'information', 'help',
-      'backspace-outline', 'help-buoy', 'asterisk', 'alert', 'alert-circled',
-      'refresh', 'loop', 'shuffle', 'home', 'search', 'flag', 'star',
-      'heart', 'heart-broken', 'gear-a', 'gear-b', 'toggle-filled', 'toggle',
-      'settings', 'wrench', 'hammer', 'edit', 'trash-a', 'trash-b',
-      'document', 'document-text', 'clipboard', 'scissors', 'funnel',
-      'bookmark', 'email', 'email-unread', 'folder', 'filing', 'archive',
-      'reply', 'reply-all', 'forward',
-    ],
-
-    fontAwesome: [
-      'adjust', 'anchor', 'archive', 'chart-area', 'arrows-alt', 'arrows-alt-h',
-      'arrows-alt-v', 'asterisk', 'at', 'car', 'ban', 'university',
-      'chart-bar', 'barcode', 'bars', 'bed', 'beer',
-      'bell', 'bell-slash', 'bicycle', 'binoculars',
-      'birthday-cake', 'bolt', 'bomb', 'book', 'bookmark',
-      'briefcase', 'bug', 'building', 'bullhorn',
-    ],
-
-    fontAwesomeRegular: [ 'chart-bar', 'bell', 'bell-slash', 'bookmark', 'building' ],
-  };
-
+  icons = ['home', 'person', 'settings', 'email', 'star', 'favorite', 'search', 'delete', 'add', 'edit', 'visibility', 'lock', 'shopping_cart', 'dashboard', 'bar_chart', 'map', 'cloud', 'attach_file', 'calendar_today', 'notifications', 'chat', 'phone', 'photo', 'print', 'save', 'share', 'thumb_up', 'warning', 'check_circle', 'info', 'error', 'help'];
 }

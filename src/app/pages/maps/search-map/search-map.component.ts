@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { PositionModel } from './entity/position.model';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'ngx-search-map',
-  templateUrl: './search-map.component.html',
+  standalone: true,
+  imports: [MatCardModule],
+  template: `
+    <mat-card>
+      <mat-card-header><mat-card-title>Search Maps</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <div class="map-placeholder"><p>Map with search functionality</p></div>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styles: [`.map-placeholder{height:400px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;border-radius:4px;color:#8f9bb3}`],
 })
-export class SearchMapComponent {
-  searchedPosition: PositionModel = new PositionModel();
-
-  setPosition(position: PositionModel) {
-    this.searchedPosition = position;
-  }
-}
+export class SearchMapComponent {}

@@ -1,98 +1,85 @@
-import { Component, Input } from '@angular/core';
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
-interface TreeNode<T> {
-  data: T;
-  children?: TreeNode<T>[];
-  expanded?: boolean;
-}
-
-interface FSEntry {
-  name: string;
-  size: string;
-  kind: string;
-  items?: number;
-}
+interface TreeNode { name: string; size: string; kind: string; items?: TreeNode[]; level?: number; expanded?: boolean; visible?: boolean; }
 
 @Component({
   selector: 'ngx-tree-grid',
-  templateUrl: './tree-grid.component.html',
-  styleUrls: ['./tree-grid.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatTableModule, MatIconModule, MatButtonModule],
+  template: `
+    <mat-card>
+      <mat-card-header><mat-card-title>Tree Grid</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="flatData" class="full-width">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let row">
+              <span [style.padding-left.px]="(row.level || 0) * 24">
+                <button mat-icon-button *ngIf="row.items?.length" (click)="toggle(row)" class="toggle-btn">
+                  <mat-icon>{{ row.expanded ? 'expand_more' : 'chevron_right' }}</mat-icon>
+                </button>
+                <span *ngIf="!row.items?.length" class="leaf-spacer"></span>
+                {{ row.name }}
+              </span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="size"><th mat-header-cell *matHeaderCellDef>Size</th><td mat-cell *matCellDef="let row">{{ row.size }}</td></ng-container>
+          <ng-container matColumnDef="kind"><th mat-header-cell *matHeaderCellDef>Kind</th><td mat-cell *matCellDef="let row">{{ row.kind }}</td></ng-container>
+          <tr mat-header-row *matHeaderRowDef="['name', 'size', 'kind']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['name', 'size', 'kind'];" [hidden]="!row.visible"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styles: [`.full-width{width:100%}.toggle-btn{width:24px;height:24px;line-height:24px}.leaf-spacer{display:inline-block;width:40px}`],
 })
 export class TreeGridComponent {
-  customColumn = 'name';
-  defaultColumns = [ 'size', 'kind', 'items' ];
-  allColumns = [ this.customColumn, ...this.defaultColumns ];
-
-  dataSource: NbTreeGridDataSource<FSEntry>;
-
-  sortColumn: string;
-  sortDirection: NbSortDirection = NbSortDirection.NONE;
-
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
-    this.dataSource = this.dataSourceBuilder.create(this.data);
-  }
-
-  updateSort(sortRequest: NbSortRequest): void {
-    this.sortColumn = sortRequest.column;
-    this.sortDirection = sortRequest.direction;
-  }
-
-  getSortDirection(column: string): NbSortDirection {
-    if (this.sortColumn === column) {
-      return this.sortDirection;
-    }
-    return NbSortDirection.NONE;
-  }
-
-  private data: TreeNode<FSEntry>[] = [
-    {
-      data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
-      children: [
-        { data: { name: 'project-1.doc', kind: 'doc', size: '240 KB' } },
-        { data: { name: 'project-2.doc', kind: 'doc', size: '290 KB' } },
-        { data: { name: 'project-3', kind: 'txt', size: '466 KB' } },
-        { data: { name: 'project-4.docx', kind: 'docx', size: '900 KB' } },
-      ],
-    },
-    {
-      data: { name: 'Reports', kind: 'dir', size: '400 KB', items: 2 },
-      children: [
-        { data: { name: 'Report 1', kind: 'doc', size: '100 KB' } },
-        { data: { name: 'Report 2', kind: 'doc', size: '300 KB' } },
-      ],
-    },
-    {
-      data: { name: 'Other', kind: 'dir', size: '109 MB', items: 2 },
-      children: [
-        { data: { name: 'backup.bkp', kind: 'bkp', size: '107 MB' } },
-        { data: { name: 'secret-note.txt', kind: 'txt', size: '2 MB' } },
-      ],
-    },
+  treeData: TreeNode[] = [
+    { name: 'Projects', size: '1.8 MB', kind: 'dir', items: [
+      { name: 'project-1.doc', size: '240 KB', kind: 'doc' },
+      { name: 'project-2.doc', size: '290 KB', kind: 'doc' },
+      { name: 'Internal', size: '1.2 MB', kind: 'dir', items: [
+        { name: 'report.xls', size: '400 KB', kind: 'xls' },
+        { name: 'notes.txt', size: '50 KB', kind: 'txt' },
+      ]},
+    ]},
+    { name: 'Reports', size: '400 KB', kind: 'dir', items: [
+      { name: 'report-2024.pdf', size: '200 KB', kind: 'pdf' },
+      { name: 'report-2023.pdf', size: '200 KB', kind: 'pdf' },
+    ]},
+    { name: 'Other', size: '109 MB', kind: 'dir', items: [
+      { name: 'backup.bkp', size: '107 MB', kind: 'bkp' },
+      { name: 'secret-note.txt', size: '2 MB', kind: 'txt' },
+    ]},
   ];
+  flatData: TreeNode[] = [];
 
-  getShowOn(index: number) {
-    const minWithForMultipleColumns = 400;
-    const nextColumnStep = 100;
-    return minWithForMultipleColumns + (nextColumnStep * index);
+  constructor() { this.flatData = this.flatten(this.treeData, 0); }
+
+  private flatten(nodes: TreeNode[], level: number): TreeNode[] {
+    const result: TreeNode[] = [];
+    for (const node of nodes) {
+      const flatNode = { ...node, level, expanded: false, visible: level === 0 };
+      result.push(flatNode);
+      if (node.items) { result.push(...this.flatten(node.items, level + 1)); }
+    }
+    return result;
   }
-}
 
-@Component({
-  selector: 'ngx-fs-icon',
-  template: `
-    <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon">
-    </nb-tree-grid-row-toggle>
-    <ng-template #fileIcon>
-      <nb-icon icon="file-text-outline"></nb-icon>
-    </ng-template>
-  `,
-})
-export class FsIconComponent {
-  @Input() kind: string;
-  @Input() expanded: boolean;
-
-  isDir(): boolean {
-    return this.kind === 'dir';
+  toggle(node: TreeNode) {
+    node.expanded = !node.expanded;
+    const idx = this.flatData.indexOf(node);
+    const level = node.level || 0;
+    for (let i = idx + 1; i < this.flatData.length; i++) {
+      if ((this.flatData[i].level || 0) <= level) break;
+      if (node.expanded && (this.flatData[i].level || 0) === level + 1) { this.flatData[i].visible = true; }
+      else if (!node.expanded) { this.flatData[i].visible = false; this.flatData[i].expanded = false; }
+    }
+    this.flatData = [...this.flatData];
   }
 }
