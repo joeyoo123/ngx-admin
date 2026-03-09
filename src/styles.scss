@@ -1,0 +1,73 @@
+@use '@angular/material' as mat;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Light theme (default)
+:root {
+  --bg-primary: #edf1f7;
+  --bg-card: #ffffff;
+  --text-primary: #222b45;
+  --text-secondary: #8f9bb3;
+  --sidebar-bg: #ffffff;
+  --header-bg: #ffffff;
+  --accent: #3366ff;
+}
+
+// Dark theme
+body.dark-theme {
+  --bg-primary: #151a30;
+  --bg-card: #222b45;
+  --text-primary: #ffffff;
+  --text-secondary: #8f9bb3;
+  --sidebar-bg: #1a2138;
+  --header-bg: #222b45;
+  --accent: #598bff;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+// Material card overrides
+.mat-mdc-card {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+  margin-bottom: 16px;
+}
+
+// Bootstrap grid compatibility
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -8px;
+  margin-left: -8px;
+}
+.col, [class*="col-"] {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}

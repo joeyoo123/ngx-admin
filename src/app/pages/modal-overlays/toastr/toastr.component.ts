@@ -1,86 +1,52 @@
 import { Component } from '@angular/core';
-import {
-  NbComponentStatus,
-  NbGlobalLogicalPosition,
-  NbGlobalPhysicalPosition,
-  NbGlobalPosition,
-  NbToastrService,
-  NbToastrConfig,
-} from '@nebular/theme';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'ngx-toastr',
-  styleUrls: ['./toastr.component.scss'],
-  templateUrl: './toastr.component.html',
+  selector: 'ngx-toastr-demo',
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatSnackBarModule, MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
+  template: `
+    <mat-card>
+      <mat-card-header><mat-card-title>Toastr / Snackbar</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="fw">
+          <mat-label>Message</mat-label>
+          <input matInput [(ngModel)]="message">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="fw">
+          <mat-label>Position</mat-label>
+          <mat-select [(ngModel)]="position">
+            <mat-option value="top">Top</mat-option>
+            <mat-option value="bottom">Bottom</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="btn-row">
+          <button mat-flat-button color="primary" (click)="showToast()">Show Toast</button>
+          <button mat-flat-button color="accent" (click)="showToast()">Info</button>
+          <button mat-flat-button color="warn" (click)="showToast()">Warning</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styles: [`.fw{width:100%}.btn-row{display:flex;gap:16px}`],
 })
-export class ToastrComponent {
-  constructor(private toastrService: NbToastrService) {}
+export class ToastrDemoComponent {
+  message = 'Hello! This is a toast message.';
+  position = 'bottom';
 
-  config: NbToastrConfig;
+  constructor(private snackBar: MatSnackBar) {}
 
-  index = 1;
-  destroyByClick = true;
-  duration = 2000;
-  hasIcon = true;
-  position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
-  preventDuplicates = false;
-  status: NbComponentStatus = 'primary';
-
-  title = 'HI there!';
-  content = `I'm cool toaster!`;
-
-  types: NbComponentStatus[] = [
-    'primary',
-    'success',
-    'info',
-    'warning',
-    'danger',
-  ];
-  positions: string[] = [
-    NbGlobalPhysicalPosition.TOP_RIGHT,
-    NbGlobalPhysicalPosition.TOP_LEFT,
-    NbGlobalPhysicalPosition.BOTTOM_LEFT,
-    NbGlobalPhysicalPosition.BOTTOM_RIGHT,
-    NbGlobalLogicalPosition.TOP_END,
-    NbGlobalLogicalPosition.TOP_START,
-    NbGlobalLogicalPosition.BOTTOM_END,
-    NbGlobalLogicalPosition.BOTTOM_START,
-  ];
-
-  quotes = [
-    { title: null, body: 'We rock at Angular' },
-    { title: null, body: 'Titles are not always needed' },
-    { title: null, body: 'Toastr rock!' },
-  ];
-
-  makeToast() {
-    this.showToast(this.status, this.title, this.content);
-  }
-
-  openRandomToast () {
-    const typeIndex = Math.floor(Math.random() * this.types.length);
-    const quoteIndex = Math.floor(Math.random() * this.quotes.length);
-    const type = this.types[typeIndex];
-    const quote = this.quotes[quoteIndex];
-
-    this.showToast(type, quote.title, quote.body);
-  }
-
-  private showToast(type: NbComponentStatus, title: string, body: string) {
-    const config = {
-      status: type,
-      destroyByClick: this.destroyByClick,
-      duration: this.duration,
-      hasIcon: this.hasIcon,
-      position: this.position,
-      preventDuplicates: this.preventDuplicates,
-    };
-    const titleContent = title ? `. ${title}` : '';
-
-    this.index += 1;
-    this.toastrService.show(
-      body,
-      `Toast ${this.index}${titleContent}`,
-      config);
+  showToast() {
+    this.snackBar.open(this.message, 'Close', {
+      duration: 3000,
+      verticalPosition: this.position as 'top' | 'bottom',
+    });
   }
 }

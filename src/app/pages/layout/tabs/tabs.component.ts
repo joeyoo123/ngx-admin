@@ -1,43 +1,23 @@
 import { Component } from '@angular/core';
-
-@Component({
-  selector: 'ngx-tab1',
-  template: `
-    <p>Early home automation began with labor-saving machines. Self-contained electric or gas powered
-      <a target="_blank" href="https://en.wikipedia.org/wiki/Home_appliances">home appliances</a>
-      became viable in the 1900s with the introduction of
-      <a target="_blank" href="https://en.wikipedia.org/wiki/Electric_power_distribution">electric power distribution
-      </a> and led to the introduction of washing machines (1904), water heaters (1889), refrigerators, sewing machines,
-      dishwashers, and clothes dryers.
-    </p>
-  `,
-})
-export class Tab1Component { }
-
-@Component({
-  selector: 'ngx-tab2',
-  template: `
-    <p>Tab 2 works!</p>
-  `,
-})
-export class Tab2Component { }
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'ngx-tabs',
-  styleUrls: ['./tabs.component.scss'],
-  templateUrl: './tabs.component.html',
+  standalone: true,
+  imports: [MatCardModule, MatTabsModule],
+  template: `
+    <mat-card>
+      <mat-card-header><mat-card-title>Tabs</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Tab 1"><div class="tab-content"><p>Content for tab 1. This is the first tab panel.</p></div></mat-tab>
+          <mat-tab label="Tab 2"><div class="tab-content"><p>Content for tab 2. This is the second tab panel.</p></div></mat-tab>
+          <mat-tab label="Tab 3"><div class="tab-content"><p>Content for tab 3. This is the third tab panel.</p></div></mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  `,
+  styles: [`.tab-content{padding:24px}`],
 })
-export class TabsComponent {
-
-  tabs: any[] = [
-    {
-      title: 'Route tab #1',
-      route: '/pages/layout/tabs/tab1',
-    },
-    {
-      title: 'Route tab #2',
-      route: '/pages/layout/tabs/tab2',
-    },
-  ];
-
-}
+export class TabsComponent {}

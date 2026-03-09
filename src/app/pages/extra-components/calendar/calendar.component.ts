@@ -1,31 +1,23 @@
 import { Component } from '@angular/core';
-import { NbCalendarRange, NbDateService } from '@nebular/theme';
-import { DayCellComponent } from './day-cell/day-cell.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
-    selector: 'ngx-calendar',
-    templateUrl: 'calendar.component.html',
-    styleUrls: ['calendar.component.scss'],
+  selector: 'ngx-calendar',
+  standalone: true,
+  imports: [MatCardModule, MatDatepickerModule, MatNativeDateModule],
+  template: `
+    <mat-card>
+      <mat-card-header><mat-card-title>Calendar</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <mat-calendar [selected]="selectedDate" (selectedChange)="onDateChange($event)"></mat-calendar>
+        <p>Selected date: {{ selectedDate?.toLocaleDateString() || 'None' }}</p>
+      </mat-card-content>
+    </mat-card>
+  `,
 })
 export class CalendarComponent {
-
-  date = new Date();
-  date2 = new Date();
-  range: NbCalendarRange<Date>;
-  dayCellComponent = DayCellComponent;
-
-  constructor(protected dateService: NbDateService<Date>) {
-    this.range = {
-      start: this.dateService.addDay(this.monthStart, 3),
-      end: this.dateService.addDay(this.monthEnd, -3),
-    };
-  }
-
-  get monthStart(): Date {
-    return this.dateService.getMonthStart(new Date());
-  }
-
-  get monthEnd(): Date {
-    return this.dateService.getMonthEnd(new Date());
-  }
+  selectedDate: Date | null = new Date();
+  onDateChange(date: Date) { this.selectedDate = date; }
 }
