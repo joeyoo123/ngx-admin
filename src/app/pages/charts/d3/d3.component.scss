@@ -1,0 +1,42 @@
+ngx-d3-bar,
+ngx-d3-pie,
+ngx-d3-advanced-pie,
+ngx-d3-area-stack,
+ngx-d3-line,
+ngx-d3-polar {
+  display: block;
+  width: 100%;
+  height: 400px;
+
+  ::ng-deep {
+    .pie-label {
+      fill: #484848;
+    }
+
+    text {
+      fill: #a4abb3;
+    }
+
+    .chart-legend {
+      .legend-labels {
+        background: #f7f9fc;
+      }
+      .legend-label {
+        color: #a4abb3;
+        .active .legend-label-text {
+          color: #484848;
+        }
+      }
+    }
+
+    .total-value,
+    .item-value,
+    .item-percent {
+      line-height: 1.25;
+    }
+
+    .legend-items {
+      overflow-y: hidden;
+    }
+  }
+}
