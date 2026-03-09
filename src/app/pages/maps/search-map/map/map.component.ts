@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PositionModel } from '../entity/position.model';
 
 @Component({
+  standalone: false,
   selector: 'ngx-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],

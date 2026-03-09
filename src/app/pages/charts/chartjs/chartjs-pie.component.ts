@@ -2,9 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
+  standalone: false,
   selector: 'ngx-chartjs-pie',
   template: `
-    <chart type="pie" [data]="data" [options]="options"></chart>
+    <canvas baseChart type="pie" [data]="data" [options]="options"></canvas>
   `,
 })
 export class ChartjsPieComponent implements OnDestroy {

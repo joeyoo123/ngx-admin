@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'ngx-earning-card',
   styleUrls: ['./earning-card.component.scss'],
   templateUrl: './earning-card.component.html',

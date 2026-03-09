@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'ngx-profit-card',
   styleUrls: ['./profit-card.component.scss'],
   templateUrl: './profit-card.component.html',

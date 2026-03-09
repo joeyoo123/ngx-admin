@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NbCardModule } from '@nebular/theme';
 
@@ -10,8 +11,9 @@ import { MapsRoutingModule, routedComponents } from './maps-routing.module';
 @NgModule({
   imports: [
     ThemeModule,
+    RouterModule,
     GoogleMapsModule,
-    LeafletModule.forRoot(),
+    LeafletModule,
     MapsRoutingModule,
     NgxEchartsModule,
     NbCardModule,

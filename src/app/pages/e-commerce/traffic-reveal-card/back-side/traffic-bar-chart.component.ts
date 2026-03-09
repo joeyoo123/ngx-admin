@@ -6,6 +6,7 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
 declare const echarts: any;
 
 @Component({
+  standalone: false,
   selector: 'ngx-traffic-bar-chart',
   template: `
     <div echarts

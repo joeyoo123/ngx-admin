@@ -4,7 +4,23 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    <table class="smart-table">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">{{ col.title }}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data; let i = index">
+          <td *ngFor="let col of columns">{{ row[col.key] }}</td>
+          <td>
+            <button nbButton size="small" status="danger" (click)="onDeleteConfirm(i)">
+              <nb-icon icon="trash-2-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </nb-card-body>
 </nb-card>

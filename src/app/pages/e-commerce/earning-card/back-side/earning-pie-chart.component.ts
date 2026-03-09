@@ -3,6 +3,7 @@ import { NbThemeService } from '@nebular/theme';
 import { delay, takeWhile } from 'rxjs/operators';
 
 @Component({
+  standalone: false,
   selector: 'ngx-earning-pie-chart',
   styleUrls: ['./earning-card-back.component.scss'],
   template: `
