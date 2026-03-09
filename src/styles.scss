@@ -1,73 +1,138 @@
 @use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 html, body {
   height: 100%;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// Light theme (default)
+// ─── Light theme (default) ──────────────────────────────────
 :root {
-  --bg-primary: #edf1f7;
+  --bg-primary: #f0f4f8;
   --bg-card: #ffffff;
-  --text-primary: #222b45;
-  --text-secondary: #8f9bb3;
-  --sidebar-bg: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --text-primary: #1a2138;
+  --text-secondary: #6b7a99;
+  --text-hint: #a0aec0;
+  --sidebar-bg: linear-gradient(195deg, #1a2138 0%, #222b45 60%, #2e3a5e 100%);
+  --sidebar-text: rgba(255,255,255,0.87);
+  --sidebar-text-muted: rgba(255,255,255,0.45);
+  --sidebar-active-bg: rgba(99,138,255,0.22);
+  --sidebar-hover-bg: rgba(255,255,255,0.07);
   --header-bg: #ffffff;
+  --header-shadow: 0 1px 3px rgba(0,0,0,0.06);
   --accent: #3366ff;
+  --accent-light: #598bff;
+  --accent-bg: rgba(51,102,255,0.08);
+  --success: #00d68f;
+  --warning: #ffaa00;
+  --danger: #ff3d71;
+  --info: #0095ff;
+  --card-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+  --card-shadow-hover: 0 8px 28px rgba(0,0,0,0.10);
+  --border-color: #e4e9f2;
+  --divider: #edf1f7;
 }
 
-// Dark theme
+// ─── Dark theme ─────────────────────────────────────────────
 body.dark-theme {
-  --bg-primary: #151a30;
-  --bg-card: #222b45;
-  --text-primary: #ffffff;
-  --text-secondary: #8f9bb3;
-  --sidebar-bg: #1a2138;
-  --header-bg: #222b45;
+  --bg-primary: #13171f;
+  --bg-card: #1e2436;
+  --bg-card-hover: #252d42;
+  --text-primary: #edf1f7;
+  --text-secondary: #a4abb6;
+  --text-hint: #6b7a99;
+  --sidebar-bg: linear-gradient(195deg, #0d1117 0%, #161b28 60%, #1a2038 100%);
+  --sidebar-text: rgba(255,255,255,0.9);
+  --sidebar-text-muted: rgba(255,255,255,0.4);
+  --sidebar-active-bg: rgba(99,138,255,0.25);
+  --sidebar-hover-bg: rgba(255,255,255,0.05);
+  --header-bg: #1e2436;
+  --header-shadow: 0 1px 3px rgba(0,0,0,0.3);
   --accent: #598bff;
+  --accent-light: #7cacff;
+  --accent-bg: rgba(89,139,255,0.12);
+  --card-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.1);
+  --card-shadow-hover: 0 8px 28px rgba(0,0,0,0.3);
+  --border-color: #2a3358;
+  --divider: #2a3358;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
+  &:hover { color: var(--accent-light); }
 }
 
-// Material card overrides
+// ─── Card polish ────────────────────────────────────────────
 .mat-mdc-card {
   background-color: var(--bg-card) !important;
   color: var(--text-primary) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
-  margin-bottom: 16px;
+  border-radius: 12px !important;
+  box-shadow: var(--card-shadow) !important;
+  border: 1px solid var(--border-color) !important;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease, transform 0.15s ease !important;
+  overflow: hidden;
+}
+.mat-mdc-card:hover { box-shadow: var(--card-shadow-hover) !important; }
+.mat-mdc-card-header { padding: 20px 24px 0 !important; }
+.mat-mdc-card-title {
+  font-size: 0.95rem !important; font-weight: 600 !important;
+  letter-spacing: -0.01em !important; color: var(--text-primary) !important;
+}
+.mat-mdc-card-content { padding: 16px 24px 20px !important; }
+
+// ─── Toolbar ────────────────────────────────────────────────
+.mat-toolbar {
+  background: var(--header-bg) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--header-shadow) !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
-// Bootstrap grid compatibility
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -8px;
-  margin-left: -8px;
+// ─── Table polish ───────────────────────────────────────────
+.mat-mdc-table { background: transparent !important; }
+.mat-mdc-header-cell {
+  font-weight: 600 !important; color: var(--text-secondary) !important;
+  font-size: 0.7rem !important; text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
 }
-.col, [class*="col-"] {
-  padding-right: 8px;
-  padding-left: 8px;
+.mat-mdc-cell { color: var(--text-primary) !important; }
+.mat-mdc-row:hover { background: var(--accent-bg) !important; }
+
+// ─── Tab polish ─────────────────────────────────────────────
+.mat-mdc-tab-group .mat-mdc-tab-header {
+  border-bottom: 1px solid var(--divider) !important;
 }
 
-// Scrollbar
-::-webkit-scrollbar {
-  width: 6px;
+// ─── Buttons ────────────────────────────────────────────────
+.mat-mdc-flat-button.mat-primary,
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  border-radius: 8px !important; font-weight: 600 !important;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+
+// ─── Dialog ─────────────────────────────────────────────────
+.mat-mdc-dialog-container { border-radius: 16px !important; }
+
+// ─── Scrollbar ──────────────────────────────────────────────
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  background: rgba(107,122,153,0.3); border-radius: 3px;
+  &:hover { background: rgba(107,122,153,0.5); }
 }
+
+// ─── Utility ────────────────────────────────────────────────
+.text-muted { color: var(--text-secondary); }
+.text-hint { color: var(--text-hint); }
