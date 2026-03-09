@@ -1,0 +1,1 @@
+# ngx-admin-charts\nAngular 19 Charts Demo - migrated from ngx-admin
