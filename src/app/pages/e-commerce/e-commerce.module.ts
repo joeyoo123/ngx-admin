@@ -10,6 +10,7 @@ import {
   NbListModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -68,7 +69,7 @@ import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earni
     NbListModule,
     ChartModule,
     NbProgressBarModule,
-    NgxEchartsModule,
+    NgxEchartsModule.forRoot({ echarts }),
     NgxChartsModule,
     LeafletModule,
   ],
