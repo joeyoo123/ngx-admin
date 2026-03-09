@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 
-import './ckeditor.loader';
-import 'ckeditor';
+declare var CKEDITOR: any;
 
 @Component({
   selector: 'ngx-ckeditor',
@@ -11,10 +10,28 @@ import 'ckeditor';
         CKEditor
       </nb-card-header>
       <nb-card-body>
-        <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor>
+        <div #editorContainer></div>
       </nb-card-body>
     </nb-card>
   `,
 })
-export class CKEditorComponent {
+export class CKEditorComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('editorContainer', { static: true }) editorContainer: ElementRef;
+  private editorInstance: any;
+
+  ngAfterViewInit() {
+    if (typeof CKEDITOR !== 'undefined') {
+      this.editorInstance = CKEDITOR.replace(this.editorContainer.nativeElement, {
+        extraPlugins: 'divarea',
+        height: '320',
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.editorInstance) {
+      this.editorInstance.destroy();
+      this.editorInstance = null;
+    }
+  }
 }
