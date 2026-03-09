@@ -33,16 +33,19 @@ export class ChartjsLineComponent implements OnDestroy {
           label: 'Series A',
           backgroundColor: ColorHelper.hexToRgbA(colors.primary, 0.3),
           borderColor: colors.primary,
+          tension: 0.4,
         }, {
           data: [28, 48, 40, 19, 86, 27, 90],
           label: 'Series B',
           backgroundColor: ColorHelper.hexToRgbA(colors.danger, 0.3),
           borderColor: colors.danger,
+          tension: 0.4,
         }, {
           data: [18, 48, 77, 9, 100, 27, 40],
           label: 'Series C',
           backgroundColor: ColorHelper.hexToRgbA(colors.info, 0.3),
           borderColor: colors.info,
+          tension: 0.4,
         }],
       };
 

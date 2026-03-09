@@ -33,11 +33,13 @@ export class ChartjsRadarComponent implements OnDestroy {
           label: 'Series A',
           borderColor: colors.danger,
           backgroundColor: ColorHelper.hexToRgbA(colors.dangerLight, 0.5),
+          tension: 0.4,
         }, {
           data: [28, 48, 40, 19, 96, 27, 100],
           label: 'Series B',
           borderColor: colors.warning,
           backgroundColor: ColorHelper.hexToRgbA(colors.warningLight, 0.5),
+          tension: 0.4,
         }],
       };
 

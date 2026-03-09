@@ -88,6 +88,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           {
             name: 'Mail marketing',
             type: 'line',
+            smooth: true,
             stack: 'Total amount',
             areaStyle: { opacity: parseFloat(echarts.areaOpacity) },
             data: [120, 132, 101, 134, 90, 230, 210],
@@ -95,6 +96,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           {
             name: 'Affiliate advertising',
             type: 'line',
+            smooth: true,
             stack: 'Total amount',
             areaStyle: { opacity: parseFloat(echarts.areaOpacity) },
             data: [220, 182, 191, 234, 290, 330, 310],
@@ -102,6 +104,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           {
             name: 'Video ad',
             type: 'line',
+            smooth: true,
             stack: 'Total amount',
             areaStyle: { opacity: parseFloat(echarts.areaOpacity) },
             data: [150, 232, 201, 154, 190, 330, 410],
@@ -109,6 +112,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           {
             name: 'Direct interview',
             type: 'line',
+            smooth: true,
             stack: 'Total amount',
             areaStyle: { opacity: parseFloat(echarts.areaOpacity) },
             data: [320, 332, 301, 334, 390, 330, 320],
@@ -116,6 +120,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           {
             name: 'Search engine',
             type: 'line',
+            smooth: true,
             stack: 'Total amount',
             label: {
               show: true,

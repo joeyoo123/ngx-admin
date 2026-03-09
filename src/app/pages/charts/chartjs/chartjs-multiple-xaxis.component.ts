@@ -36,6 +36,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           borderDash: [5, 5],
           pointRadius: 8,
           pointHoverRadius: 10,
+          tension: 0.4,
         }, {
           label: 'dataset - individual point sizes',
           data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
@@ -45,6 +46,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           borderDash: [5, 5],
           pointRadius: 8,
           pointHoverRadius: 10,
+          tension: 0.4,
         }, {
           label: 'dataset - large pointHoverRadius',
           data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
@@ -53,6 +55,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           fill: false,
           pointRadius: 8,
           pointHoverRadius: 10,
+          tension: 0.4,
         }, {
           label: 'dataset - large pointHitRadius',
           data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
@@ -61,6 +64,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           fill: false,
           pointRadius: 8,
           pointHoverRadius: 10,
+          tension: 0.4,
         }],
       };
 
