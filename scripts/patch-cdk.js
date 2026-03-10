@@ -17,27 +17,39 @@ if (!fs.existsSync(chunkFile)) {
 // Patch the chunk file to add _VIEW_REPEATER_STRATEGY InjectionToken
 let chunkContent = fs.readFileSync(chunkFile, 'utf8');
 if (!chunkContent.includes('_VIEW_REPEATER_STRATEGY')) {
-  // Add import for InjectionToken and the _VIEW_REPEATER_STRATEGY constant
-  const patchCode = `import { InjectionToken } from '@angular/core';\nconst _VIEW_REPEATER_STRATEGY = new InjectionToken('_ViewRepeater');\n`;
-  chunkContent = patchCode + chunkContent;
-  // Add to exports
-  chunkContent = chunkContent.replace(
-    /export \{ ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation \}/,
-    'export { ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation, _VIEW_REPEATER_STRATEGY }'
-  );
-  fs.writeFileSync(chunkFile, chunkContent);
-  console.log('Patched _recycle-view-repeater-strategy-chunk.mjs');
+  const exportRegex = /export \{ ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation \}/;
+  if (!exportRegex.test(chunkContent)) {
+    console.warn('WARNING: Could not find expected export statement in chunk file. CDK patch skipped.');
+  } else {
+    const patchCode = `import { InjectionToken } from '@angular/core';\nconst _VIEW_REPEATER_STRATEGY = new InjectionToken('_ViewRepeater');\n`;
+    chunkContent = patchCode + chunkContent;
+    chunkContent = chunkContent.replace(
+      exportRegex,
+      'export { ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation, _VIEW_REPEATER_STRATEGY }'
+    );
+    fs.writeFileSync(chunkFile, chunkContent);
+    console.log('Patched _recycle-view-repeater-strategy-chunk.mjs');
+  }
 }
 
 // Patch the collections entry point to re-export _VIEW_REPEATER_STRATEGY
+if (!fs.existsSync(collectionsFile)) {
+  console.log('CDK collections file not found, skipping collections patch.');
+  process.exit(0);
+}
 let collectionsContent = fs.readFileSync(collectionsFile, 'utf8');
 if (!collectionsContent.includes('_VIEW_REPEATER_STRATEGY')) {
-  collectionsContent = collectionsContent.replace(
-    /export \{ ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation \} from '.\/\_recycle-view-repeater-strategy-chunk.mjs';/,
-    "export { ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation, _VIEW_REPEATER_STRATEGY } from './_recycle-view-repeater-strategy-chunk.mjs';"
-  );
-  fs.writeFileSync(collectionsFile, collectionsContent);
-  console.log('Patched collections.mjs');
+  const collectionsRegex = /export \{ ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation \} from '.\/\_recycle-view-repeater-strategy-chunk.mjs';/;
+  if (!collectionsRegex.test(collectionsContent)) {
+    console.warn('WARNING: Could not find expected export statement in collections file. Collections patch skipped.');
+  } else {
+    collectionsContent = collectionsContent.replace(
+      collectionsRegex,
+      "export { ArrayDataSource, _RecycleViewRepeaterStrategy, _ViewRepeaterOperation, _VIEW_REPEATER_STRATEGY } from './_recycle-view-repeater-strategy-chunk.mjs';"
+    );
+    fs.writeFileSync(collectionsFile, collectionsContent);
+    console.log('Patched collections.mjs');
+  }
 }
 
 console.log('CDK patch complete.');
