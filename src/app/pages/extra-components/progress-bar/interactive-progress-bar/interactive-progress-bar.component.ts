@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'ngx-interactive-progress-bar',
   templateUrl: 'interactive-progress-bar.component.html',
   styleUrls: ['interactive-progress-bar.component.scss'],

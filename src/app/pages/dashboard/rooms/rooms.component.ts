@@ -3,6 +3,7 @@ import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@n
 import { map } from 'rxjs/operators';
 
 @Component({
+  standalone: false,
   selector: 'ngx-rooms',
   styleUrls: ['./rooms.component.scss'],
   template: `

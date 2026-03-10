@@ -5,6 +5,7 @@ import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 
 @Component({
+  standalone: false,
   selector: 'ngx-earning-card-front',
   styleUrls: ['./earning-card-front.component.scss'],
   templateUrl: './earning-card-front.component.html',

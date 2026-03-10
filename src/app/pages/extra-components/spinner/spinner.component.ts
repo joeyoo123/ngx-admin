@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'ngx-spinner',
   templateUrl: 'spinner.component.html',
   styleUrls: ['spinner.component.scss'],

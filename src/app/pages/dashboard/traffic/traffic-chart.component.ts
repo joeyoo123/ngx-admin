@@ -5,6 +5,7 @@ import * as echarts from 'echarts';
 import { LayoutService } from '../../../@core/utils';
 
 @Component({
+  standalone: false,
   selector: 'ngx-traffic-chart',
   template: `
     <div echarts

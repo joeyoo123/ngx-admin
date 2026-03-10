@@ -5,6 +5,7 @@ import * as echarts from 'echarts';
 import { LayoutService } from '../../../../@core/utils/layout.service';
 
 @Component({
+  standalone: false,
   selector: 'ngx-earning-live-update-chart',
   styleUrls: ['earning-card-front.component.scss'],
   template: `

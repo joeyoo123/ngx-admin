@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
+  standalone: false,
   selector: 'ngx-leaflet',
   styleUrls: ['./leaflet.component.scss'],
   template: `

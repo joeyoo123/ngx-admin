@@ -5,6 +5,7 @@ import { takeWhile } from 'rxjs/operators';
 import { UserActivityData, UserActive } from '../../../@core/data/user-activity';
 
 @Component({
+  standalone: false,
   selector: 'ngx-user-activity',
   styleUrls: ['./user-activity.component.scss'],
   templateUrl: './user-activity.component.html',
