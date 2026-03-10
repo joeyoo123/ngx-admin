@@ -6,7 +6,7 @@ ngx-admin is an Angular dashboard demo app using Nebular UI framework. It has mu
 ## Local Dev Setup
 1. Run `npm install --legacy-peer-deps` (needed due to peer dependency mismatches between ecosystem libraries)
 2. Start dev server: `npx ng serve --port 4200`
-3. Wait ~30s for compilation, then verify at `http://localhost:4200`
+3. Wait ~30-40s for compilation, then verify at `http://localhost:4200`
 4. No authentication is required - the app is a public demo
 
 ## Key Pages to Test After Upgrades
@@ -44,11 +44,13 @@ These pages exercise the most critical components that are likely to break durin
 - ECharts deprecation warnings about `normal` hierarchy, `clockWise`, `hoverAnimation` - these are pre-existing in the chart configuration and are warnings, not errors
 - "Can't get DOM width or height" from ECharts - appears when chart containers aren't visible yet (e.g., offscreen tabs)
 - CommonJS dependency warnings for eva-icons and leaflet during build
+- No actual errors should appear in the console - only the above warnings
 
 ## Common Issues During Angular Upgrades
 - **zone.js import paths**: Changed from `zone.js/dist/*` to `zone.js/plugins/*` in Angular 16+
 - **ngcc removal**: Angular 16 removed ngcc; any library not compiled for Ivy will fail. Check for View Engine-only libraries
 - **echarts imports**: Components may use `declare const echarts: any;` (UMD global) which should be `import * as echarts from 'echarts';` (ES6 module)
+- **Double-bundling risk**: When migrating echarts/chart.js to ES module imports, remember to also remove the old UMD script entries from angular.json `scripts` array. Otherwise both the UMD global and ES module will be bundled (~1.16 MB extra)
 - **ng2-smart-table**: The original package is unmaintained and not Ivy-compatible. Use `angular2-smart-table` as a drop-in replacement
 - **angular2-chartjs**: Unmaintained and not Ivy-compatible. A local ChartComponent wrapper exists in `src/app/@theme/components/chartjs/`
 - **font-awesome**: The repo uses `@fortawesome/fontawesome-free`, not the old `font-awesome` package. Check angular.json references
