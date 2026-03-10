@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LocalDataSource } from 'angular2-smart-table';
 
 import { SmartTableData } from '../../../@core/data/smart-table';
 
@@ -11,61 +10,25 @@ import { SmartTableData } from '../../../@core/data/smart-table';
 })
 export class SmartTableComponent {
 
-  settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      firstName: {
-        title: 'First Name',
-        type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
-      },
-    },
-  };
+  columns = [
+    { key: 'id', title: 'ID' },
+    { key: 'firstName', title: 'First Name' },
+    { key: 'lastName', title: 'Last Name' },
+    { key: 'username', title: 'Username' },
+    { key: 'email', title: 'E-mail' },
+    { key: 'age', title: 'Age' },
+  ];
 
-  source: LocalDataSource = new LocalDataSource();
+  data: any[] = [];
 
   constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+    this.data = this.service.getData();
   }
 
-  onDeleteConfirm(event): void {
+  onDeleteConfirm(index: number): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
+      this.data.splice(index, 1);
+      this.data = [...this.data];
     }
   }
 }

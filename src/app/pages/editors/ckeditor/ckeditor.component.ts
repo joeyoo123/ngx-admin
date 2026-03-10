@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 
-import './ckeditor.loader';
-import 'ckeditor';
-
 @Component({
   standalone: false,
   selector: 'ngx-ckeditor',
@@ -12,10 +9,12 @@ import 'ckeditor';
         CKEditor
       </nb-card-header>
       <nb-card-body>
-        <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor>
+        <textarea rows="20" style="width:100%;padding:16px;font-family:inherit;border:1px solid #e4e9f2;border-radius:4px;"
+          [(ngModel)]="editorContent"></textarea>
       </nb-card-body>
     </nb-card>
   `,
 })
 export class CKEditorComponent {
+  editorContent = 'Start typing your content here...';
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
-import { Angular2SmartTableModule } from 'angular2-smart-table';
+import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule, NbButtonModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { TablesRoutingModule, routedComponents } from './tables-routing.module';
@@ -12,9 +11,9 @@ import { FsIconComponent } from './tree-grid/tree-grid.component';
     NbTreeGridModule,
     NbIconModule,
     NbInputModule,
+    NbButtonModule,
     ThemeModule,
     TablesRoutingModule,
-    Angular2SmartTableModule,
   ],
   declarations: [
     ...routedComponents,
