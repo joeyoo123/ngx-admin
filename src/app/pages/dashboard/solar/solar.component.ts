@@ -3,6 +3,7 @@ import { delay } from 'rxjs/operators';
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
+
 @Component({
   selector: 'ngx-solar',
   styleUrls: ['./solar.component.scss'],

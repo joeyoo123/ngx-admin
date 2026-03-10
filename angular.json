@@ -59,7 +59,11 @@
             ],
             "allowedCommonJsDependencies": [
               "echarts",
+              "eva-icons",
+              "leaflet",
               "lodash",
+              "lodash-es",
+              "rfdc",
               "zrender/lib/svg/svg",
               "zrender/lib/vml/vml"
             ],
@@ -180,5 +184,8 @@
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
