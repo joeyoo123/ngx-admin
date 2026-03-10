@@ -4,6 +4,7 @@ import { delay, takeWhile } from 'rxjs/operators';
 import * as echarts from 'echarts';
 
 @Component({
+  standalone: false,
   selector: 'ngx-earning-pie-chart',
   styleUrls: ['./earning-card-back.component.scss'],
   template: `

@@ -6,6 +6,7 @@ import { NbThemeService } from '@nebular/theme';
 import { registerMap } from 'echarts';
 
 @Component({
+  standalone: false,
   selector: 'ngx-bubble-map',
   styleUrls: ['./bubble-map.component.scss'],
   template: `

@@ -7,6 +7,7 @@ import { ProfitChart } from '../../../../@core/data/profit-chart';
 import { LayoutService } from '../../../../@core/utils/layout.service';
 
 @Component({
+  standalone: false,
   selector: 'ngx-profit-chart',
   styleUrls: ['./charts-common.component.scss'],
   template: `

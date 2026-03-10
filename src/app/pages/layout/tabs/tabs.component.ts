@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'ngx-tab1',
   template: `
     <p>Early home automation began with labor-saving machines. Self-contained electric or gas powered
@@ -15,6 +16,7 @@ import { Component } from '@angular/core';
 export class Tab1Component { }
 
 @Component({
+  standalone: false,
   selector: 'ngx-tab2',
   template: `
     <p>Tab 2 works!</p>
@@ -23,6 +25,7 @@ export class Tab1Component { }
 export class Tab2Component { }
 
 @Component({
+  standalone: false,
   selector: 'ngx-tabs',
   styleUrls: ['./tabs.component.scss'],
   templateUrl: './tabs.component.html',
