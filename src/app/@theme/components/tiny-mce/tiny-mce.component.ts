@@ -21,7 +21,9 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit {
     tinymce.init({
       target: this.host.nativeElement,
       plugins: 'link table',
-      skin_url: `${this.locationStrategy.getBaseHref()}assets/skins/oxide`,
+      base_url: `${this.locationStrategy.getBaseHref()}assets/tinymce`,
+      skin: 'oxide',
+      suffix: '.min',
       setup: editor => {
         this.editor = editor;
         editor.on('keyup', () => {
