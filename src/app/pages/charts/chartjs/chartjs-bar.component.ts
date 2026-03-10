@@ -35,34 +35,32 @@ export class ChartjsBarComponent implements OnDestroy {
       this.options = {
         maintainAspectRatio: false,
         responsive: true,
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+          x: {
+            grid: {
+              display: false,
+              color: chartjs.axisLineColor,
             },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+            ticks: {
+              color: chartjs.textColor,
             },
-          ],
+          },
+          y: {
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
+            },
+            ticks: {
+              color: chartjs.textColor,
+            },
+          },
         },
       };
     });

@@ -1,65 +1,30 @@
 {
+  "customSyntax": "postcss-scss",
+  "plugins": [
+    "@stylistic/stylelint-plugin"
+  ],
   "rules": {
-    "color-hex-case": "lower",
     "color-no-invalid-hex": true,
 
     "function-calc-no-unspaced-operator": true,
-    "function-comma-space-after": "always-single-line",
-    "function-comma-space-before": "never",
     "function-name-case": "lower",
     "function-url-quotes": "always",
-    "function-whitespace-after": "always",
 
-    "number-leading-zero": "always",
-    "number-no-trailing-zeros": true,
     "length-zero-no-unit": true,
 
     "string-no-newline": true,
-    "string-quotes": "single",
 
-    "unit-case": "lower",
     "unit-no-unknown": true,
-    "unit-whitelist": ["px", "%", "deg", "ms", "em", "vh", "vw", "s", "rem"],
-
-    "value-list-comma-space-after": "always-single-line",
-    "value-list-comma-space-before": "never",
+    "unit-allowed-list": ["px", "%", "deg", "ms", "em", "vh", "vw", "s", "rem"],
 
     "shorthand-property-no-redundant-values": true,
-
-    "property-case": "lower",
 
     "declaration-block-no-duplicate-properties": [ true, {
       "ignore": ["consecutive-duplicates-with-different-values"]
     }],
-    "declaration-block-trailing-semicolon": "always",
     "declaration-block-single-line-max-declarations": 1,
-    "declaration-block-semicolon-space-before": "never",
-    "declaration-block-semicolon-space-after": "always-single-line",
-    "declaration-block-semicolon-newline-before": "never-multi-line",
-    "declaration-block-semicolon-newline-after": "always-multi-line",
-    "declaration-property-value-blacklist": [
-      { "/.*/": ["initial"] },
-      { "message": "The `initial` value is not supported in IE."}
-    ],
+    "declaration-property-value-no-unknown": null,
 
-    "block-closing-brace-newline-after": [
-      "always",
-      {
-        "ignoreAtRules": ["if", "else"]
-      }
-    ],
-    "block-closing-brace-newline-before": "always-multi-line",
-    "block-opening-brace-newline-after": "always-multi-line",
-    "block-opening-brace-space-before": "always-multi-line",
-
-    "selector-attribute-brackets-space-inside": "never",
-    "selector-attribute-operator-space-after": "never",
-    "selector-attribute-operator-space-before": "never",
-    "selector-combinator-space-after": "always",
-    "selector-combinator-space-before": "always",
-    "selector-pseudo-class-case": "lower",
-    "selector-pseudo-class-parentheses-space-inside": "never",
-    "selector-pseudo-element-case": "lower",
     "selector-pseudo-element-colon-notation": "double",
     "selector-pseudo-element-no-unknown": [true, {
       "ignorePseudoElements": ["ng-deep"]
@@ -67,8 +32,40 @@
     "selector-type-case": "lower",
     "selector-max-id": 0,
 
-    "no-missing-end-of-source-newline": true,
-
-    "max-line-length": 120
+    "@stylistic/color-hex-case": "lower",
+    "@stylistic/function-comma-space-after": "always-single-line",
+    "@stylistic/function-comma-space-before": "never",
+    "@stylistic/function-whitespace-after": "always",
+    "@stylistic/number-leading-zero": "always",
+    "@stylistic/number-no-trailing-zeros": true,
+    "@stylistic/string-quotes": "single",
+    "@stylistic/unit-case": "lower",
+    "@stylistic/value-list-comma-space-after": "always-single-line",
+    "@stylistic/value-list-comma-space-before": "never",
+    "@stylistic/property-case": "lower",
+    "@stylistic/declaration-block-trailing-semicolon": "always",
+    "@stylistic/declaration-block-semicolon-space-before": "never",
+    "@stylistic/declaration-block-semicolon-space-after": "always-single-line",
+    "@stylistic/declaration-block-semicolon-newline-before": "never-multi-line",
+    "@stylistic/declaration-block-semicolon-newline-after": "always-multi-line",
+    "@stylistic/block-closing-brace-newline-after": [
+      "always",
+      {
+        "ignoreAtRules": ["if", "else"]
+      }
+    ],
+    "@stylistic/block-closing-brace-newline-before": "always-multi-line",
+    "@stylistic/block-opening-brace-newline-after": "always-multi-line",
+    "@stylistic/block-opening-brace-space-before": "always-multi-line",
+    "@stylistic/selector-attribute-brackets-space-inside": "never",
+    "@stylistic/selector-attribute-operator-space-after": "never",
+    "@stylistic/selector-attribute-operator-space-before": "never",
+    "@stylistic/selector-combinator-space-after": "always",
+    "@stylistic/selector-combinator-space-before": "always",
+    "@stylistic/selector-pseudo-class-case": "lower",
+    "@stylistic/selector-pseudo-class-parentheses-space-inside": "never",
+    "@stylistic/selector-pseudo-element-case": "lower",
+    "@stylistic/no-missing-end-of-source-newline": true,
+    "@stylistic/max-line-length": 120
   }
 }

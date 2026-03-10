@@ -25,6 +25,31 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/skins",
+                "output": "/assets/tinymce/skins"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/themes",
+                "output": "/assets/tinymce/themes"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/models",
+                "output": "/assets/tinymce/models"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/icons",
+                "output": "/assets/tinymce/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/plugins",
+                "output": "/assets/tinymce/plugins"
               }
             ],
             "styles": [
@@ -41,11 +66,7 @@
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/tinymce/themes/modern/theme.min.js",
-              "node_modules/tinymce/plugins/link/plugin.min.js",
-              "node_modules/tinymce/plugins/paste/plugin.min.js",
-              "node_modules/tinymce/plugins/table/plugin.min.js"
+              "node_modules/tinymce/tinymce.min.js"
             ],
             "allowedCommonJsDependencies": [
               "chart.js",
@@ -125,20 +146,6 @@
         }
       }
     },
-    "ngx-admin-demo-e2e": {
-      "root": "e2e",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-admin-demo:serve"
-          }
-        }
-      }
-    }
   },
   "schematics": {
     "@schematics/angular:component": {
