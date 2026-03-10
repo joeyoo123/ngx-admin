@@ -51,9 +51,11 @@
               "node_modules/chart.js/dist/Chart.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "angular2-chartjs",
+              "chart.js",
               "echarts",
               "lodash",
+              "lodash-es",
+              "rfdc",
               "zrender/lib/svg/svg",
               "zrender/lib/vml/vml"
             ],
@@ -129,7 +131,7 @@
               "node_modules/typeface-exo/index.css",
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/ionicons/scss/ionicons.scss",
-              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/socicon/css/socicon.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
@@ -187,5 +189,8 @@
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
