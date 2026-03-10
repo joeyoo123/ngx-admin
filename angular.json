@@ -25,6 +25,11 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/skins/ui/oxide",
+                "output": "/assets/skins/oxide"
               }
             ],
             "styles": [

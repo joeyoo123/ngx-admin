@@ -25,9 +25,10 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Run npm audit
-        run: npm audit --audit-level=high
-        # This will fail the build if any high or critical vulnerabilities are found.
-        # Change to --audit-level=critical if high-severity issues are acceptable initially.
+        run: npm audit --audit-level=critical
+        # Fails the build if any critical vulnerabilities are found.
+        # Note: high-severity transitive dependency issues exist but cannot be
+        # directly fixed. Use --audit-level=high once transitive deps are resolved.
 
       - name: Run npm audit (full report)
         if: always()
