@@ -41,7 +41,8 @@
             "style": "camelCase",
             "type": "attribute"
           }
-        ]
+        ],
+        "@angular-eslint/prefer-standalone": "off"
       }
     },
     {
