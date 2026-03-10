@@ -11,6 +11,7 @@ import {
 import { Chart } from 'chart.js';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'chart',
   template: '<canvas #chartCanvas></canvas>',
   styles: [':host { display: block; }'],
