@@ -1,8 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-d3-advanced-pie',
+  standalone: true,
+  imports: [NgxChartsModule],
   template: `
     <ngx-charts-advanced-pie-chart
       [scheme]="colorScheme"
@@ -12,23 +16,14 @@ import { NbThemeService } from '@nebular/theme';
 })
 export class D3AdvancedPieComponent implements OnDestroy {
   single = [
-    {
-      name: 'Germany',
-      value: 8940000,
-    },
-    {
-      name: 'USA',
-      value: 5000000,
-    },
-    {
-      name: 'France',
-      value: 7200000,
-    },
+    { name: 'Germany', value: 8940000 },
+    { name: 'USA', value: 5000000 },
+    { name: 'France', value: 7200000 },
   ];
   colorScheme: any;
-  themeSubscription: any;
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {

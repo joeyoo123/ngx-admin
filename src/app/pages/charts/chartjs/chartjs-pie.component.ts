@@ -1,20 +1,27 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { BaseChartDirective } from 'ng2-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-chartjs-pie',
+  standalone: true,
+  imports: [BaseChartDirective],
   template: `
-    <chart type="pie" [data]="data" [options]="options"></chart>
+    <canvas baseChart
+      [type]="'pie'"
+      [data]="data"
+      [options]="options">
+    </canvas>
   `,
 })
 export class ChartjsPieComponent implements OnDestroy {
-  data: any;
-  options: any;
-  themeSubscription: any;
+  data: any = {};
+  options: any = {};
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
 
@@ -29,21 +36,11 @@ export class ChartjsPieComponent implements OnDestroy {
       this.options = {
         maintainAspectRatio: false,
         responsive: true,
-        scales: {
-          xAxes: [
-            {
-              display: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
             },
-          ],
-          yAxes: [
-            {
-              display: false,
-            },
-          ],
-        },
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
           },
         },
       };

@@ -1,20 +1,16 @@
-@import '../../../@theme/styles/themes';
+ngx-chartjs-pie,
+ngx-chartjs-bar,
+ngx-chartjs-line,
+ngx-chartjs-multiple-xaxis,
+ngx-chartjs-bar-horizontal,
+ngx-chartjs-radar {
+  display: block;
+  height: 400px;
+  width: 100%;
 
-@include nb-install-component() {
-  ngx-chartjs-pie,
-  ngx-chartjs-bar,
-  ngx-chartjs-line,
-  ngx-chartjs-multiple-xaxis,
-  ngx-chartjs-bar-horizontal,
-  ngx-chartjs-radar {
+  canvas {
     display: block;
-    height: nb-theme(card-height-medium);
-    width: 100%;
-
-    ::ng-deep chart {
-      display: block;
-      height: 100%;
-      width: 100%;
-    }
+    height: 100% !important;
+    width: 100% !important;
   }
 }

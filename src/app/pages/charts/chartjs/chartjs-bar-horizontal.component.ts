@@ -1,74 +1,79 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { BaseChartDirective } from 'ng2-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-chartjs-bar-horizontal',
+  standalone: true,
+  imports: [BaseChartDirective],
   template: `
-    <chart type="horizontalBar" [data]="data" [options]="options"></chart>
+    <canvas baseChart
+      [type]="'bar'"
+      [data]="data"
+      [options]="options">
+    </canvas>
   `,
 })
 export class ChartjsBarHorizontalComponent implements OnDestroy {
-  data: any;
-  options: any;
-  themeSubscription: any;
+  data: any = {};
+  options: any = {};
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
 
       this.data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [{
-            label: 'Dataset 1',
-            backgroundColor: colors.infoLight,
-            borderWidth: 1,
-            data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
-          }, {
-            label: 'Dataset 2',
-            backgroundColor: colors.successLight,
-            data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
-          },
-        ],
+          label: 'Dataset 1',
+          backgroundColor: colors.infoLight,
+          borderWidth: 1,
+          data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
+        }, {
+          label: 'Dataset 2',
+          backgroundColor: colors.successLight,
+          data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
+        }],
       };
 
       this.options = {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         elements: {
-          rectangle: {
+          bar: {
             borderWidth: 2,
           },
         },
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+          x: {
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
             },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: false,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+            ticks: {
+              color: chartjs.textColor,
             },
-          ],
+          },
+          y: {
+            grid: {
+              display: false,
+              color: chartjs.axisLineColor,
+            },
+            ticks: {
+              color: chartjs.textColor,
+            },
+          },
         },
-        legend: {
-          position: 'right',
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
       };

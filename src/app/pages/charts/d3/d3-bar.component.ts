@@ -1,8 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-d3-bar',
+  standalone: true,
+  imports: [NgxChartsModule],
   template: `
     <ngx-charts-bar-vertical
       [scheme]="colorScheme"
@@ -16,7 +20,6 @@ import { NbThemeService } from '@nebular/theme';
   `,
 })
 export class D3BarComponent implements OnDestroy {
-
   results = [
     { name: 'Germany', value: 8940 },
     { name: 'USA', value: 5000 },
@@ -28,9 +31,9 @@ export class D3BarComponent implements OnDestroy {
   xAxisLabel = 'Country';
   yAxisLabel = 'Population';
   colorScheme: any;
-  themeSubscription: any;
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {

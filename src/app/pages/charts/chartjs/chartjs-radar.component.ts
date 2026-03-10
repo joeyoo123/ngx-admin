@@ -1,20 +1,28 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService, NbColorHelper } from '@nebular/theme';
+import { BaseChartDirective } from 'ng2-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { ColorHelper } from '../../../core/color-helper';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-chartjs-radar',
+  standalone: true,
+  imports: [BaseChartDirective],
   template: `
-    <chart type="radar" [data]="data" [options]="options"></chart>
+    <canvas baseChart
+      [type]="'radar'"
+      [data]="data"
+      [options]="options">
+    </canvas>
   `,
 })
 export class ChartjsRadarComponent implements OnDestroy {
-  options: any;
-  data: {};
-  themeSubscription: any;
+  options: any = {};
+  data: any = {};
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
       const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
 
@@ -24,34 +32,39 @@ export class ChartjsRadarComponent implements OnDestroy {
           data: [65, 59, 90, 81, 56, 55, 40],
           label: 'Series A',
           borderColor: colors.danger,
-          backgroundColor: NbColorHelper.hexToRgbA(colors.dangerLight, 0.5),
+          backgroundColor: ColorHelper.hexToRgbA(colors.dangerLight, 0.5),
+          tension: 0.4,
         }, {
           data: [28, 48, 40, 19, 96, 27, 100],
           label: 'Series B',
           borderColor: colors.warning,
-          backgroundColor: NbColorHelper.hexToRgbA(colors.warningLight, 0.5),
+          backgroundColor: ColorHelper.hexToRgbA(colors.warningLight, 0.5),
+          tension: 0.4,
         }],
       };
 
       this.options = {
         responsive: true,
         maintainAspectRatio: false,
-        scaleFontColor: 'white',
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
-        scale: {
-          pointLabels: {
-            fontSize: 14,
-            fontColor: chartjs.textColor,
-          },
-          gridLines: {
-            color: chartjs.axisLineColor,
-          },
-          angleLines: {
-            color: chartjs.axisLineColor,
+        scales: {
+          r: {
+            pointLabels: {
+              font: { size: 14 },
+              color: chartjs.textColor,
+            },
+            grid: {
+              color: chartjs.axisLineColor,
+            },
+            angleLines: {
+              color: chartjs.axisLineColor,
+            },
           },
         },
       };

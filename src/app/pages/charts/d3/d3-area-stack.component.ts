@@ -1,8 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThemeService } from '../../../core/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ngx-d3-area-stack',
+  standalone: true,
+  imports: [NgxChartsModule],
   template: `
     <ngx-charts-area-chart
       [scheme]="colorScheme"
@@ -21,31 +25,22 @@ import { NbThemeService } from '@nebular/theme';
 export class D3AreaStackComponent implements OnDestroy {
   multi = [{
     name: 'Germany',
-    series: [{
-        name: '2010',
-        value: 7300000,
-      }, {
-        name: '2011',
-        value: 8940000,
-      }],
+    series: [
+      { name: '2010', value: 7300000 },
+      { name: '2011', value: 8940000 },
+    ],
   }, {
     name: 'USA',
-    series: [{
-        name: '2010',
-        value: 7870000,
-      }, {
-        name: '2011',
-        value: 8270000,
-      }],
+    series: [
+      { name: '2010', value: 7870000 },
+      { name: '2011', value: 8270000 },
+    ],
   }, {
     name: 'France',
-    series: [{
-        name: '2010',
-        value: 5000002,
-      }, {
-        name: '2011',
-        value: 5800000,
-      }],
+    series: [
+      { name: '2010', value: 5000002 },
+      { name: '2011', value: 5800000 },
+    ],
   }];
   showLegend = true;
   autoScale = true;
@@ -56,9 +51,9 @@ export class D3AreaStackComponent implements OnDestroy {
   xAxisLabel = 'Country';
   yAxisLabel = 'Population';
   colorScheme: any;
-  themeSubscription: any;
+  themeSubscription: Subscription;
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: ThemeService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {
