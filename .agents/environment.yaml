@@ -1,0 +1,8 @@
+# ngx-admin environment configuration
+version: 1
+
+maintenance:
+  - command: "npm install --legacy-peer-deps"
+    triggers:
+      - "package.json"
+      - "package-lock.json"

@@ -26,6 +26,20 @@ Always use `npm install --legacy-peer-deps` for this repo. The ecosystem librari
 - **RxJS 7.x recommended**: If upgrading from RxJS 6, `Subject.next()` requires an explicit value parameter (no more implicit `undefined`).
 - **node-sass removed**: Replace `node-sass` with `sass` (Dart Sass) in devDependencies.
 
+### Angular 17
+- **TypeScript 5.2.x-5.4.x required**: Upgrade from 5.1.x. TypeScript 5.4.5 works well even though `@typescript-eslint` may warn about `<5.4.0` — this is safe to ignore.
+- **zone.js ~0.14.x**: Upgrade from 0.13.x to 0.14.x.
+- **Nebular 13**: `@nebular/*` packages must be upgraded to ^13.0.0 for Angular 17 compatibility.
+- **ngx-echarts 17.x**: Upgrade from 16.x to ^17.2.0. The `forRoot()` pattern with dynamic import remains the same.
+- **@angular-eslint 17.x**: Upgrade all `@angular-eslint/*` packages to 17.5.x.
+- **@asymmetrik/ngx-leaflet 17.x**: Upgrade to ^17.0.0.
+- **angular2-smart-table**: Upgrade to ^3.8.0 for Angular 17 compatibility.
+- **@swimlane/ngx-charts**: ^20.5.0 works with Angular 17 (use `--legacy-peer-deps`).
+- **esbuild + Vite**: Now default for new projects but the existing webpack builder still works fine. No migration needed.
+- **New control flow syntax** (`@if`, `@for`, `@switch`): Available but optional. The old `*ngIf`, `*ngFor` directives still work.
+- **Double-bundling risk**: When echarts/chart.js are imported as ES modules via `NgxEchartsModule.forRoot()` and the local ChartComponent, the old UMD script entries in `angular.json` `scripts` array MUST be removed. Otherwise both copies are bundled (~1.16 MB wasted). Remove `echarts.min.js`, `bmap.min.js`, and `Chart.min.js` from scripts.
+- **allowedCommonJsDependencies**: Add `chart.js`, `echarts`, `eva-icons`, `leaflet`, `lodash`, `lodash-es`, `rfdc`, `zrender/lib/svg/svg`, `zrender/lib/vml/vml` to suppress build warnings.
+
 ## Ivy Compatibility Issues
 Angular 16+ requires all libraries to be Ivy-compiled. Libraries that only support View Engine will cause runtime errors. Known problematic libraries in this repo:
 
@@ -54,6 +68,7 @@ When upgrading echarts/ngx-echarts:
    - `src/app/pages/dashboard/` (electricity-chart, traffic-chart, solar)
    - `src/app/pages/e-commerce/` (earning, orders, profit, visitors, country-orders, traffic-bar, stats-area)
 4. Add `chart.js`, `lodash-es`, and `rfdc` to `allowedCommonJsDependencies` in `angular.json` if needed.
+5. **Remove old script entries** from angular.json `scripts` array after migration to avoid double-bundling.
 
 ## Leaflet Module Update
 In newer versions of `@asymmetrik/ngx-leaflet`, `LeafletModule.forRoot()` is deprecated. Use just `LeafletModule` in module imports.
