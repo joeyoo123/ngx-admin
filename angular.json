@@ -16,7 +16,9 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -25,6 +27,11 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ckeditor/",
+                "output": "/assets/ckeditor/"
               }
             ],
             "styles": [
@@ -42,13 +49,15 @@
             "scripts": [
               "node_modules/pace-js/pace.min.js",
               "node_modules/tinymce/tinymce.min.js",
-              "node_modules/tinymce/themes/modern/theme.min.js",
+              "node_modules/tinymce/themes/silver/theme.min.js",
               "node_modules/tinymce/plugins/link/plugin.min.js",
               "node_modules/tinymce/plugins/paste/plugin.min.js",
-              "node_modules/tinymce/plugins/table/plugin.min.js"
+              "node_modules/tinymce/plugins/table/plugin.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/chart.js/dist/Chart.min.js",
+              "node_modules/ckeditor/ckeditor.js"
             ],
             "allowedCommonJsDependencies": [
-              "chart.js",
               "echarts",
               "eva-icons",
               "leaflet",
@@ -108,10 +117,45 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:unit-test",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "src/tsconfig.spec.json",
-            "buildTarget": "ngx-admin-demo:build"
+            "scripts": [
+              "node_modules/pace-js/pace.min.js",
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/tinymce/themes/silver/theme.min.js",
+              "node_modules/tinymce/plugins/link/plugin.min.js",
+              "node_modules/tinymce/plugins/paste/plugin.min.js",
+              "node_modules/tinymce/plugins/table/plugin.min.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/typeface-exo/index.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/socicon/css/socicon.css",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
+              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
+              "src/app/@theme/styles/styles.scss"
+            ],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              "src/favicon.png",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets/img/markers"
+              }
+            ]
           }
         },
         "lint": {
@@ -121,20 +165,6 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
-          }
-        }
-      }
-    },
-    "ngx-admin-demo-e2e": {
-      "root": "e2e",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-admin-demo:serve"
           }
         }
       }

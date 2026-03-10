@@ -1,7 +1,8 @@
+import * as echarts from 'echarts';
 import { delay } from 'rxjs/operators';
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import * as echarts from 'echarts';
+
 
 @Component({
   standalone: false,
