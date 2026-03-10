@@ -9,6 +9,7 @@ import { takeWhile } from 'rxjs/operators';
 
 
 @Component({
+  standalone: false,
   selector: 'ngx-country-orders-map',
   styleUrls: ['./country-orders-map.component.scss'],
   template: `

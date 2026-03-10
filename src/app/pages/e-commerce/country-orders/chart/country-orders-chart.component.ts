@@ -6,6 +6,7 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
 
 
 @Component({
+  standalone: false,
   selector: 'ngx-country-orders-chart',
   styleUrls: ['./country-orders-chart.component.scss'],
   template: `

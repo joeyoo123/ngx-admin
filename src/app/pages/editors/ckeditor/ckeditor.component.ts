@@ -3,6 +3,7 @@ import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@ang
 declare var CKEDITOR: any;
 
 @Component({
+  standalone: false,
   selector: 'ngx-ckeditor',
   template: `
     <nb-card>

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
+  standalone: false,
   selector: 'ngx-echarts-bar',
   template: `
     <div echarts [options]="options" class="echart"></div>

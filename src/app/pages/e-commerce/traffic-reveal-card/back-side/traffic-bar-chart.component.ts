@@ -5,6 +5,7 @@ import { takeWhile } from 'rxjs/operators';
 import { LayoutService } from '../../../../@core/utils/layout.service';
 
 @Component({
+  standalone: false,
   selector: 'ngx-traffic-bar-chart',
   template: `
     <div echarts

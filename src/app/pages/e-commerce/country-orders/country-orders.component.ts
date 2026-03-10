@@ -4,6 +4,7 @@ import { takeWhile } from 'rxjs/operators';
 import { CountryOrderData } from '../../../@core/data/country-order';
 
 @Component({
+  standalone: false,
   selector: 'ngx-country-orders',
   styleUrls: ['./country-orders.component.scss'],
   template: `
