@@ -8,7 +8,7 @@ import {
   ViewChild,
   SimpleChanges,
 } from '@angular/core';
-import { Chart } from 'chart.js';
+import Chart from 'chart.js';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
