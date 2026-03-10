@@ -53,6 +53,8 @@
             "allowedCommonJsDependencies": [
               "chart.js",
               "echarts",
+              "eva-icons",
+              "leaflet",
               "lodash",
               "lodash-es",
               "rfdc",
