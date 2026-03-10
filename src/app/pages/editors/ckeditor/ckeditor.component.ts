@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 
-import './ckeditor.loader';
-import 'ckeditor';
-
 @Component({
   standalone: false,
   selector: 'ngx-ckeditor',
@@ -12,7 +9,8 @@ import 'ckeditor';
         CKEditor
       </nb-card-header>
       <nb-card-body>
-        <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor>
+        <p>CKEditor 4 has been removed due to security vulnerabilities.
+        Migrate to <a href="https://ckeditor.com/docs/ckeditor5/latest/installation/frameworks/angular.html" target="_blank">CKEditor 5</a> for a modern rich text editing experience.</p>
       </nb-card-body>
     </nb-card>
   `,

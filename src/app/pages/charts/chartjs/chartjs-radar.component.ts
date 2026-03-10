@@ -37,22 +37,27 @@ export class ChartjsRadarComponent implements OnDestroy {
       this.options = {
         responsive: true,
         maintainAspectRatio: false,
-        scaleFontColor: 'white',
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
-        scale: {
-          pointLabels: {
-            fontSize: 14,
-            fontColor: chartjs.textColor,
-          },
-          gridLines: {
-            color: chartjs.axisLineColor,
-          },
-          angleLines: {
-            color: chartjs.axisLineColor,
+        scales: {
+          r: {
+            pointLabels: {
+              font: {
+                size: 14,
+              },
+              color: chartjs.textColor,
+            },
+            grid: {
+              color: chartjs.axisLineColor,
+            },
+            angleLines: {
+              color: chartjs.axisLineColor,
+            },
           },
         },
       };

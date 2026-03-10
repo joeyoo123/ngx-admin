@@ -30,21 +30,11 @@ export class ChartjsPieComponent implements OnDestroy {
       this.options = {
         maintainAspectRatio: false,
         responsive: true,
-        scales: {
-          xAxes: [
-            {
-              display: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
             },
-          ],
-          yAxes: [
-            {
-              display: false,
-            },
-          ],
-        },
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
           },
         },
       };

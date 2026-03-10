@@ -8,7 +8,9 @@ import {
   ViewChild,
   SimpleChanges,
 } from '@angular/core';
-import Chart from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
 
 @Component({
   standalone: false,
@@ -50,7 +52,7 @@ export class ChartComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private createChart() {
     this.chart = new Chart(this.chartCanvas.nativeElement, {
-      type: this.type,
+      type: this.type as any,
       data: this.data,
       options: this.options,
     });
