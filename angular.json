@@ -35,8 +35,7 @@
               "src/app/@theme/styles/styles.scss"
             ],
             "scripts": [
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/chart.js/dist/chart.umd.js"
+              "node_modules/tinymce/tinymce.min.js"
             ],
             "allowedCommonJsDependencies": [
               "echarts",
@@ -104,8 +103,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/chart.js/dist/chart.umd.js"
+              "node_modules/tinymce/tinymce.min.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
