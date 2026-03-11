@@ -5,14 +5,15 @@ import * as echarts from 'echarts';
 import { LayoutService } from '../../../@core/utils';
 
 @Component({
-  selector: 'ngx-traffic-chart',
-  template: `
+    selector: 'ngx-traffic-chart',
+    template: `
     <div echarts
          [options]="option"
          class="echart"
          (chartInit)="onChartInit($event)">
     </div>
   `,
+    standalone: false
 })
 export class TrafficChartComponent implements AfterViewInit, OnDestroy {
 
