@@ -4,7 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 @Component({
   selector: 'ngx-chartjs-bar-horizontal',
   template: `
-    <chart type="horizontalBar" [data]="data" [options]="options"></chart>
+    <canvas baseChart [type]="'bar'" [data]="data" [options]="options"></canvas>
   `,
 })
 export class ChartjsBarHorizontalComponent implements OnDestroy {
