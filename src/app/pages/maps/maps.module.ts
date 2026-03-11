@@ -13,7 +13,7 @@ import { MapsRoutingModule, routedComponents } from './maps-routing.module';
     GoogleMapsModule,
     LeafletModule,
     MapsRoutingModule,
-    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+    NgxEchartsModule,
     NbCardModule,
   ],
   exports: [],

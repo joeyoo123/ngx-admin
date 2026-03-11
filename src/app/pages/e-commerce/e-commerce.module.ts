@@ -68,7 +68,7 @@ import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earni
     NbListModule,
     NgChartsModule,
     NbProgressBarModule,
-    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+    NgxEchartsModule,
     NgxChartsModule,
     LeafletModule,
   ],

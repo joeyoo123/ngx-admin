@@ -43,32 +43,30 @@ export class ChartjsLineComponent implements OnDestroy {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+          x: {
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
             },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
+            ticks: {
+              color: chartjs.textColor,
             },
-          ],
+          },
+          y: {
+            grid: {
+              display: true,
+              color: chartjs.axisLineColor,
+            },
+            ticks: {
+              color: chartjs.textColor,
+            },
+          },
         },
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+        plugins: {
+          legend: {
+            labels: {
+              color: chartjs.textColor,
+            },
           },
         },
       };
