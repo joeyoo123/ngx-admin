@@ -11,10 +11,11 @@ import {
 import Chart from 'chart.js';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'chart',
-  template: '<canvas #chartCanvas></canvas>',
-  styles: [':host { display: block; }'],
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'chart',
+    template: '<canvas #chartCanvas></canvas>',
+    styles: [':host { display: block; }'],
+    standalone: false
 })
 export class ChartComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() type: string;

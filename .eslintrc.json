@@ -20,6 +20,8 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@angular-eslint/prefer-standalone": "off",
+        "@angular-eslint/no-output-native": "warn",
         "@angular-eslint/no-input-rename": [
           "warn",
           {

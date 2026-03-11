@@ -6,9 +6,9 @@ import { LayoutService } from '../../../../@core/utils';
 import { OutlineData } from '../../../../@core/data/visitors-analytics';
 
 @Component({
-  selector: 'ngx-visitors-analytics-chart',
-  styleUrls: ['./visitors-analytics-chart.component.scss'],
-  template: `
+    selector: 'ngx-visitors-analytics-chart',
+    styleUrls: ['./visitors-analytics-chart.component.scss'],
+    template: `
     <div echarts
          [options]="option"
          [merge]="option"
@@ -16,6 +16,7 @@ import { OutlineData } from '../../../../@core/data/visitors-analytics';
          (chartInit)="onChartInit($event)">
     </div>
   `,
+    standalone: false
 })
 export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, OnDestroy {
 

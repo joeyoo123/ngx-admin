@@ -4,9 +4,9 @@ import { NbThemeService } from '@nebular/theme';
 import * as echarts from 'echarts';
 
 @Component({
-  selector: 'ngx-solar',
-  styleUrls: ['./solar.component.scss'],
-  template: `
+    selector: 'ngx-solar',
+    styleUrls: ['./solar.component.scss'],
+    template: `
     <nb-card size="tiny" class="solar-card">
       <nb-card-header>Solar Energy Consumption</nb-card-header>
       <nb-card-body>
@@ -19,6 +19,7 @@ import * as echarts from 'echarts';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class SolarComponent implements AfterViewInit, OnDestroy {
 
