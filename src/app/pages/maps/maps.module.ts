@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 import { NbCardModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -11,9 +12,9 @@ import { MapsRoutingModule, routedComponents } from './maps-routing.module';
   imports: [
     ThemeModule,
     GoogleMapsModule,
-    LeafletModule.forRoot(),
+    LeafletModule,
     MapsRoutingModule,
-    NgxEchartsModule,
+    NgxEchartsModule.forRoot({ echarts }),
     NbCardModule,
   ],
   exports: [],
