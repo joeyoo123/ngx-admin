@@ -46,18 +46,15 @@
               "node_modules/tinymce/plugins/link/plugin.min.js",
               "node_modules/tinymce/plugins/paste/plugin.min.js",
               "node_modules/tinymce/plugins/table/plugin.min.js",
-              "node_modules/echarts/dist/echarts.min.js",
-              "node_modules/echarts/dist/extension/bmap.min.js",
               "node_modules/chart.js/dist/Chart.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "chart.js",
               "echarts",
+              "leaflet",
               "lodash",
               "lodash-es",
               "rfdc",
-              "zrender/lib/svg/svg",
-              "zrender/lib/vml/vml"
+              "eva-icons"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -122,8 +119,6 @@
               "node_modules/tinymce/plugins/link/plugin.min.js",
               "node_modules/tinymce/plugins/paste/plugin.min.js",
               "node_modules/tinymce/plugins/table/plugin.min.js",
-              "node_modules/echarts/dist/echarts.min.js",
-              "node_modules/echarts/dist/extension/bmap.min.js",
               "node_modules/chart.js/dist/Chart.min.js"
             ],
             "styles": [
