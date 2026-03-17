@@ -4,7 +4,7 @@ import { NbThemeService, NbColorHelper } from '@nebular/theme';
 @Component({
   selector: 'ngx-chartjs-line',
   template: `
-    <chart type="line" [data]="data" [options]="options"></chart>
+    <canvas baseChart type="line" [data]="data" [options]="options"></canvas>
   `,
 })
 export class ChartjsLineComponent implements OnDestroy {
